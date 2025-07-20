@@ -4,6 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Mona+Sans:wght@400;700&family=Source+Serif+4:wght@400;700&display=swap"
+        rel="stylesheet">
     <title>Portfólio 3D - Óculos</title>
     <style>
         * {
@@ -18,12 +21,14 @@
             height: 100vh;
         }
 
+        /* Cubo 3D */
         .cube-container {
-            width: 45%;
-            height: 80%;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding-right: 400px;
+            /* ajuste conforme desejar */
             perspective: 1000px;
         }
 
@@ -32,10 +37,6 @@
             height: 10px;
             transform: rotateY(90deg);
             transform-style: preserve-3d;
-            margin-left: -160px;
-            /* desloca pra esquerda */
-            margin-top: 350px;
-            /* desloca pra baixo */
             transform-origin: center center;
         }
 
@@ -51,71 +52,89 @@
             font-weight: bold;
             color: white;
             opacity: 0.8;
+            background-color: rgba(255, 255, 255, 0.9);
         }
 
         .front {
-            background-color: rgba(255, 255, 255, 0.9);
             transform: translateZ(100px);
         }
 
         .back {
-            background-color: rgba(255, 255, 255, 0.9);
             transform: translateZ(-100px) rotateY(180deg);
         }
 
         .right {
-            background-color: rgba(255, 255, 255, 0.9);
             transform: translateX(100px) rotateY(90deg);
         }
 
         .left {
-            background-color: rgba(255, 255, 255, 0.9);
             transform: translateX(-100px) rotateY(-90deg);
         }
 
         .top {
-            background-color: rgba(255, 255, 255, 0.9);
             transform: translateY(-100px) rotateX(90deg);
         }
 
         .bottom {
-            background-color: rgba(255, 255, 255, 0.9);
             transform: translateY(100px) rotateX(-90deg);
         }
 
+
         .sections-container {
             position: relative;
-            height: 100vh;
             width: 100%;
+            min-height: 100vh;
         }
 
+        /* Seções */
         section {
-            height: 100vh;
             width: 100%;
+            min-height: 100vh;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
+            justify-content: center;
+            padding: 2rem;
             position: absolute;
             top: 0;
             left: 0;
             opacity: 0;
             transition: opacity 0.8s ease;
+            z-index: 1;
         }
 
         section.active {
             opacity: 1;
-            z-index: 1;
-        }
-
-        .text-container {
-            width: 5%;
             z-index: 2;
         }
 
+        .text-container {
+    margin-top: -120px; /* ajustável */
+    text-align: left;
+}
+
+        .media-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Layout de Conteúdo */
+        .content-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        /* Óculos */
         .glasses-container {
-            width: 45%;
-            height: 80%;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -130,37 +149,24 @@
             transform: scale(0.8);
             opacity: 0;
             transition: all 0.8s ease;
-            margin-left: 90px;
-            /* desloca à direita */
-            margin-top: 10px;
-            /* desce um pouco */
-
         }
 
         .glasses.active {
-            transform: scale(1.2);
+            transform: scale(1);
             opacity: 1;
         }
 
+        /* Tipografia */
+
         h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1.5rem;
-            transform: translateX(200px);
-            /* Alterado de translateY para translateX */
-            opacity: 0;
-            will-change: transform, opacity;
-            color: #333;
+            font-family: 'Mona Sans', sans-serif;
+            font-size: clamp(4rem, 9vw, 7rem);
+            font-weight: 160;
+            color: #515050;
+            text-shadow: 0 0 20px rgba(35, 34, 34, 0.7);
         }
 
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            transform: translateY(100px);
-            opacity: 0;
-            color: #555;
-        }
-
-        /* Cores diferentes para cada seção */
+        /* Cores das Seções */
         section:nth-child(1) {
             background-color: #ffffff;
         }
@@ -173,16 +179,16 @@
             background-color: #e9e9e9;
         }
 
-        /* Navegação por pontos */
+        /* Navegação por Pontos */
         .nav-dots {
             position: fixed;
-            right: 30px;
+            right: 1.5rem;
             top: 50%;
             transform: translateY(-50%);
             z-index: 10;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 0.75rem;
         }
 
         .dot {
@@ -198,6 +204,116 @@
             background: rgba(0, 0, 0, 0.6);
             transform: scale(1.3);
         }
+
+        /* Media Queries para Responsividade */
+
+        /* Tablets (768px+) */
+        @media (min-width: 768px) {
+            .content-wrapper {
+                flex-direction: row;
+                align-items: flex-start;
+                justify-content: space-between;
+                gap: 3rem;
+            }
+
+            .text-container {
+                width: 45%;
+                text-align: left;
+                padding: 0;
+                margin-bottom: 0;
+                align-self: center;
+                /* Centraliza verticalmente */
+            }
+
+            .media-container {
+                width: 45%;
+                flex-direction: row;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            h1 {
+                font-size: 3rem;
+                transform: translateX(200px);
+            }
+
+            p {
+                transform: translateY(100px);
+            }
+
+            .glasses {
+                margin-left: 90px;
+                margin-top: 10px;
+            }
+
+            .cube {
+                margin-left: -320px;
+                margin-top: 200px;
+            }
+        }
+
+        /* Desktop Grande (1024px+) */
+        @media (min-width: 1024px) {
+            h1 {
+                font-size: 3.5rem;
+            }
+
+
+            .content-wrapper {
+                gap: 4rem;
+            }
+        }
+
+        /* Mobile Pequeno (até 400px) */
+        @media (max-width: 400px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .glasses {
+                width: 250px;
+                height: 250px;
+            }
+
+            .face {
+                width: 150px;
+                height: 150px;
+            }
+
+            .front {
+                transform: translateZ(75px);
+            }
+
+            .back {
+                transform: translateZ(-75px) rotateY(180deg);
+            }
+
+            .right {
+                transform: translateX(75px) rotateY(90deg);
+            }
+
+            .left {
+                transform: translateX(-75px) rotateY(-90deg);
+            }
+
+            .top {
+                transform: translateY(-75px) rotateX(90deg);
+            }
+
+            .bottom {
+                transform: translateY(75px) rotateX(-90deg);
+            }
+
+            .nav-dots {
+                right: 1rem;
+                gap: 0.5rem;
+            }
+
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
     </style>
 </head>
 
@@ -205,62 +321,78 @@
     <div class="sections-container">
         <!-- Seção 1 -->
         <section class="section-1 active">
-            <div class="text-container">
-                <h1 class="title-1">Enxergue o mundo com clareza</h1>
-            </div>
-            <div class="glasses-container">
-                <div class="glasses active" style="background-image: url('11324436-removebg-preview.png')"></div>
-            </div>
-            <div class="cube-container">
-                <div class="cube">
-                    <div class="face front">1</div>
-                    <div class="face back">2</div>
-                    <div class="face right">3</div>
-                    <div class="face left">4</div>
-                    <div class="face top">5</div>
-                    <div class="face bottom">6</div>
+            <div class="content-wrapper">
+                <div class="text-container">
+                    <h1 class="title-1">Enxergue o mundo com clareza</h1>
+                </div>
+                <div class="media-container">
+                    <div class="glasses-container">
+                        <div class="glasses active" style="background-image: url('11324435-removebg-preview.png')">
+                        </div>
+                    </div>
+                    <div class="cube-container">
+                        <div class="cube">
+                            <div class="face front">1</div>
+                            <div class="face back">2</div>
+                            <div class="face right">3</div>
+                            <div class="face left">4</div>
+                            <div class="face top">5</div>
+                            <div class="face bottom">6</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
 
         <!-- Seção 2 -->
         <section class="section-2">
-            <div class="text-container">
-                <h1 class="title-2">Proteção e estilo para seus olhos</h1>
-            </div>
-            <div class="glasses-container">
-                <div class="glasses" style="background-image: url('11324435-removebg-preview.png')"></div>
-            </div>
-            <div class="cube-container">
-                <div class="cube">
-                    <div class="face front">1</div>
-                    <div class="face back">2</div>
-                    <div class="face right">3</div>
-                    <div class="face left">4</div>
-                    <div class="face top">5</div>
-                    <div class="face bottom">6</div>
+            <div class="content-wrapper">
+                <div class="text-container">
+                    <h1 class="title-2">Proteção e estilo para seus olhos</h1>
+                </div>
+                <div class="media-container">
+                    <div class="glasses-container">
+                        <div class="glasses" style="background-image: url('11324436-removebg-preview.png')">
+                        </div>
+                    </div>
+                    <div class="cube-container">
+                        <div class="cube">
+                            <div class="face front">1</div>
+                            <div class="face back">2</div>
+                            <div class="face right">3</div>
+                            <div class="face left">4</div>
+                            <div class="face top">5</div>
+                            <div class="face bottom">6</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
+
         <!-- Seção 3 -->
         <section class="section-3">
-            <div class="text-container">
-                <h1 class="title-3">Conforto visual para quem ensina</h1>
-            </div>
-            <div class="glasses-container">
-                <div class="glasses"
-                    style="background-image: url('sunglass-with-transparent-background_807689-2305-removebg-preview.png')">
+            <div class="content-wrapper">
+                <div class="text-container">
+                    <h1 class="title-3">Conforto visual para quem ensina</h1>
                 </div>
-            </div>
-            <div class="cube-container">
-                <div class="cube">
-                    <div class="face front">1</div>
-                    <div class="face back">2</div>
-                    <div class="face right">3</div>
-                    <div class="face left">4</div>
-                    <div class="face top">5</div>
-                    <div class="face bottom">6</div>
+                <div class="media-container">
+                    <div class="glasses-container">
+                        <div class="glasses"
+                            style="background-image: url('sunglass-with-transparent-background_807689-2305-removebg-preview.png')">
+                        </div>
+                    </div>
+                    <div class="cube-container">
+                        <div class="cube">
+                            <div class="face front">1</div>
+                            <div class="face back">2</div>
+                            <div class="face right">3</div>
+                            <div class="face left">4</div>
+                            <div class="face top">5</div>
+                            <div class="face bottom">6</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -281,16 +413,28 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        // Elementos do DOM
         const sections = document.querySelectorAll('section');
         const dots = document.querySelectorAll('.dot');
+        const cubes = document.querySelectorAll('.cube');
+
+        // Estado da aplicação
         let currentSection = 0;
         const totalSections = sections.length;
         let isAnimating = false;
-        const animationDuration = 6;
-        let currentCubeRotation = 0; // Movida para cima, antes do uso
-        let autoScrollInterval; // Para controlar o intervalo
+        const animationDuration = 6; // segundos
+        let currentCubeRotation = 0;
+        let autoScrollInterval = null;
+        let touchStartX = 0;
+        let touchEndX = 0;
 
+        // Verifica se é um dispositivo móvel
+        const isMobile = () => window.innerWidth <= 767;
+
+        // Animação de entrada da seção
         function animateSectionIn(sectionIndex) {
+            if (sectionIndex < 0 || sectionIndex >= totalSections) return;
+
             const section = sections[sectionIndex];
             const title = section.querySelector('h1');
             const text = section.querySelector('p');
@@ -299,66 +443,89 @@
             // Limpa animações anteriores
             gsap.killTweensOf([title, text, glasses]);
 
-            // Reset inicial
-            gsap.set([title, text, glasses], {
-                opacity: 0,
-                x: 200,
-                y: 100,
-                scale: 0.8,
-                rotation: 0
-            });
+            // Configurações iniciais
+            const initialValues = isMobile() ?
+                { opacity: 0, y: 50 } :
+                { opacity: 0, x: 200, y: 100 };
+
+            gsap.set([title, text], initialValues);
+            gsap.set(glasses, { opacity: 0, scale: 0.8, rotation: 0 });
 
             const tl = gsap.timeline();
 
-            // Animação do título
-            tl.to(title, {
-                x: 0,
-                opacity: 1,
-                duration: 1.2,
-                ease: "power3.out"
-            })
-                // Animação do texto
-                .to(text, {
+            // Animação para desktop
+            if (!isMobile()) {
+                tl.to(title, {
+                    x: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power3.out"
+                })
+                    .to(text, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        ease: "back.out(1.7)"
+                    }, "-=0.8")
+                    .to(glasses, {
+                        opacity: 1,
+                        scale: 1,
+                        duration: 1,
+                        ease: "elastic.out(1, 0.5)"
+                    }, "-=0.5")
+                    .to(glasses, {
+                        rotation: 5,
+                        duration: 2,
+                        yoyo: true,
+                        repeat: 1,
+                        ease: "sine.inOut"
+                    }, "+=0.3");
+            }
+            // Animação simplificada para mobile
+            else {
+                tl.to(title, {
                     y: 0,
                     opacity: 1,
-                    duration: 1,
-                    ease: "back.out(1.7)"
-                }, "-=0.8")
-                // Animação dos óculos
-                .to(glasses, {
-                    opacity: 1,
-                    scale: 1,
-                    duration: 1,
-                    ease: "elastic.out(1, 0.5)"
-                }, "-=0.5")
-                // Animação contínua dos óculos (mais controlada)
-                .to(glasses, {
-                    rotation: 5,
-                    duration: 2,
-                    yoyo: true,
-                    repeat: 1, // Limita a repetição
-                    ease: "sine.inOut"
-                }, "+=0.3");
+                    duration: 0.8,
+                    ease: "power2.out"
+                })
+                    .to(text, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.6,
+                        ease: "power2.out"
+                    }, "-=0.4")
+                    .to(glasses, {
+                        opacity: 1,
+                        scale: 1,
+                        duration: 0.6,
+                        ease: "power2.out"
+                    }, "-=0.3");
+            }
 
             // Ativa estado
             glasses.classList.add('active');
-            dots.forEach(dot => dot.classList.remove('active'));
-            dots[sectionIndex].classList.add('active');
+            updateDotsNavigation(sectionIndex);
         }
 
+        // Animação de saída da seção
         function animateSectionOut(sectionIndex) {
+            if (sectionIndex < 0 || sectionIndex >= totalSections) return;
+
             const section = sections[sectionIndex];
             const title = section.querySelector('h1');
             const text = section.querySelector('p');
             const glasses = section.querySelector('.glasses');
 
-            // Para qualquer animação em andamento
             gsap.killTweensOf([title, text, glasses]);
 
             // Animação de saída
+            const exitAnimation = isMobile() ?
+                { y: -50, opacity: 0 } :
+                { x: -200, opacity: 0 };
+
             gsap.to([title, text], {
-                x: -200,
-                opacity: 0,
+                ...exitAnimation,
                 duration: 0.8,
                 ease: "power2.in"
             });
@@ -369,33 +536,37 @@
                 duration: 0.6,
                 onComplete: function () {
                     glasses.classList.remove('active');
-                    // Reset para estado inicial
-                    gsap.set([title, text], { x: 200, y: 100 });
-                    gsap.set(glasses, { scale: 0.8, rotation: 0 });
+                    resetElementsPosition(title, text, glasses);
                 }
             });
         }
 
+        // Reseta posição dos elementos
+        function resetElementsPosition(title, text, glasses) {
+            const initialValues = isMobile() ?
+                { y: 50 } :
+                { x: 200, y: 100 };
+
+            gsap.set([title, text], initialValues);
+            gsap.set(glasses, { scale: 0.8, rotation: 0 });
+        }
+
+        // Atualiza navegação por pontos
+        function updateDotsNavigation(sectionIndex) {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === sectionIndex);
+            });
+        }
+
+        // Navegação entre seções
         function goToSection(index) {
-            if (isAnimating) return;
+            if (isAnimating || index === currentSection) return;
 
             isAnimating = true;
             const nextSection = (index + totalSections) % totalSections;
 
-            // Reinicia o auto-scroll
             resetAutoScroll();
-
-            // Animação do cubo (mantém a rotação entre 0-360 graus)
-            currentCubeRotation = (currentCubeRotation + 120) % 360;
-            gsap.to(".cube", {
-                rotateY: currentCubeRotation,
-                duration: 1,
-                ease: "power1.inOut",
-                onComplete: function () {
-                    // Normaliza a rotação para evitar valores muito grandes
-                    if (currentCubeRotation >= 360) currentCubeRotation -= 360;
-                }
-            });
+            animateCubeRotation();
 
             // Transição entre seções
             animateSectionOut(currentSection);
@@ -405,53 +576,127 @@
 
             currentSection = nextSection;
 
-            // Libera para nova animação após 1s
+            // Libera para nova animação
             setTimeout(() => {
                 isAnimating = false;
             }, 1000);
         }
 
+        // Animação do cubo 3D
+        function animateCubeRotation() {
+            currentCubeRotation = (currentCubeRotation + 120) % 360;
+            gsap.to(cubes, {
+                rotateY: currentCubeRotation,
+                duration: 1,
+                ease: "power1.inOut"
+            });
+        }
+
+        // Controle do auto-scroll
         function startAutoScroll() {
-            // Limpa intervalo existente
             if (autoScrollInterval) clearInterval(autoScrollInterval);
+
+            const duration = isMobile() ? animationDuration * 1.5 : animationDuration;
 
             autoScrollInterval = setInterval(() => {
                 goToSection(currentSection + 1);
-            }, animationDuration * 1000);
+            }, duration * 1000);
         }
 
         function resetAutoScroll() {
-            startAutoScroll(); // Reinicia o contador
+            startAutoScroll();
         }
 
         // Navegação por pontos
-        dots.forEach(dot => {
-            dot.addEventListener('click', function () {
-                const sectionIndex = parseInt(this.getAttribute('data-section'));
-                if (sectionIndex !== currentSection) {
-                    goToSection(sectionIndex);
-                }
+        function setupDotsNavigation() {
+            dots.forEach(dot => {
+                dot.addEventListener('click', function () {
+                    const sectionIndex = parseInt(this.getAttribute('data-section'));
+                    if (!isNaN(sectionIndex)) {
+                        goToSection(sectionIndex);
+                    }
+                });
             });
-        });
+        }
 
         // Controles de teclado
-        document.addEventListener('keydown', function (e) {
-            switch (e.key) {
-                case 'ArrowRight': goToSection(currentSection + 1); break;
-                case 'ArrowLeft': goToSection(currentSection - 1); break;
-                case 'ArrowUp': goToSection(0); break;
-                case 'ArrowDown': goToSection(totalSections - 1); break;
+        function setupKeyboardNavigation() {
+            document.addEventListener('keydown', function (e) {
+                switch (e.key) {
+                    case 'ArrowRight':
+                        goToSection(currentSection + 1);
+                        break;
+                    case 'ArrowLeft':
+                        goToSection(currentSection - 1);
+                        break;
+                    case 'ArrowUp':
+                        goToSection(0);
+                        break;
+                    case 'ArrowDown':
+                        goToSection(totalSections - 1);
+                        break;
+                }
+            });
+        }
+
+        // Controles de toque para mobile
+        function setupTouchNavigation() {
+            document.addEventListener('touchstart', e => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+
+            document.addEventListener('touchend', e => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+        }
+
+        function handleSwipe() {
+            const threshold = 50;
+            const swipeDistance = touchEndX - touchStartX;
+
+            if (swipeDistance < -threshold) {
+                goToSection(currentSection + 1);
+            } else if (swipeDistance > threshold) {
+                goToSection(currentSection - 1);
             }
-        });
+        }
+
+        // Tratamento de redimensionamento
+        function setupResizeHandler() {
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (!isAnimating) {
+                        animateSectionIn(currentSection);
+                    }
+                }, 200);
+            });
+        }
+
+        // Limpeza
+        function setupCleanup() {
+            window.addEventListener('beforeunload', () => {
+                if (autoScrollInterval) {
+                    clearInterval(autoScrollInterval);
+                }
+            });
+        }
 
         // Inicialização
-        animateSectionIn(0);
-        startAutoScroll();
+        function init() {
+            setupDotsNavigation();
+            setupKeyboardNavigation();
+            setupTouchNavigation();
+            setupResizeHandler();
+            setupCleanup();
 
-        // Limpeza ao sair da página
-        window.addEventListener('beforeunload', function () {
-            if (autoScrollInterval) clearInterval(autoScrollInterval);
-        });
+            animateSectionIn(0);
+            startAutoScroll();
+        }
+
+        init();
     });
 </script>
 </body>
